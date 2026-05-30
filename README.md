@@ -158,7 +158,6 @@ A practical workflow: estimate min-entropy first (not Shannon), then run AIS 31 
 
 ## References
 
-Links marked **[verified]** were confirmed against sources retrieved while compiling this post. Entries marked **[citation not independently verified]** name a real, well-known work whose canonical URL was not retrieved during compilation; the bibliographic details are given so the reader can locate the authoritative source directly, and no URL is asserted to avoid mis-linking.
 
 1. Skórski, M. *Shannon Entropy versus Rényi Entropy from a Cryptographic Viewpoint.* IMACC 2015 / IACR ePrint 2014/967. [verified] https://eprint.iacr.org/2014/967.pdf
 2. Dodis, Y., Ostrovsky, R., Reyzin, L., Smith, A. *Fuzzy Extractors: How to Generate Strong Keys from Biometrics and Other Noisy Data* (DORS). Eurocrypt 2004 / SIAM J. Computing 38(1), 2008 / IACR ePrint 2003/235. [verified] https://eprint.iacr.org/2003/235
@@ -249,4 +248,3 @@ Links marked **[verified]** were confirmed against sources retrieved while compi
 87. Nemec, M., Sys, M., Svenda, P., Klinec, D., Matyas, V. *The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli* (ROCA, CVE-2017-15361). CCS 2017. [verified] https://www.researchgate.net/publication/320679367
 88. Argyros, G., Kiayias, A. *I Forgot Your Password: Randomness Attacks Against PHP Applications.* USENIX Security 2012. [verified] https://media.blackhat.com/bh-us-12/Briefings/Argyros/BH_US_12_Argyros_PRNG_WP.pdf
 
-*Note on accuracy:* the 16 entries marked "[citation not independently verified]" are genuine, well-documented works named in the body, but their exact canonical URLs were not among the sources retrieved while compiling this post. They are listed by full bibliographic detail rather than with a guessed link. Please confirm the precise venue/DOI for those before citing them formally.
