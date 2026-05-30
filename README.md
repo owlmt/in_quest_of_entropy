@@ -220,7 +220,7 @@ Links marked **[verified]** were confirmed against sources retrieved while compi
 58. Kim, S. H., Han, D., Lee, D. H. *Predictability of Android OpenSSL's Pseudo Random Number Generator.* CCS 2013. [verified] https://dl.acm.org/doi/10.1145/2508859.2516706
 59. Torvalds on RdRand / NSA (Linux community position, 2013). [verified] https://www.theregister.com/2013/09/10/torvalds_on_rrrand_nsa_gchq/
 60. Garfinkel, S., Leclerc, P. *Randomness Concerns When Deploying Differential Privacy.* WPES 2020 / arXiv:2009.03777. [verified] https://arxiv.org/pdf/2009.03777
-61. Shumow, D., Ferguson, N. *On the Possibility of a Back Door in the NIST SP800-90 Dual Ec PRNG.* CRYPTO 2007 Rump Session. (Context and analysis: https://en.wikipedia.org/wiki/Dual_EC_DRBG.) [citation not independently verified]
+61. Shumow, D., Ferguson, N. *On the Possibility of a Back Door in the NIST SP800-90 Dual Ec PRNG.* CRYPTO 2007 Rump Session. [verified] https://rump2007.cr.yp.to/15-shumow.pdf
 62. Checkoway, S., et al. *On the Practical Exploitability of Dual EC in TLS Implementations.* USENIX Security 2014. [citation not independently verified]
 63. Checkoway, S., et al. *A Systematic Analysis of the Juniper Dual EC Incident.* CCS 2016 (CVE-2015-7755 / CVE-2015-7756). [citation not independently verified]
 64. Bernstein, D. J., Lange, T., Niederhagen, R. *Dual EC: A Standardized Back Door.* LNCS 9100 (Festschrift Kahn), 2016 / IACR ePrint 2015/767. [verified] https://eprint.iacr.org/2015/767
