@@ -161,7 +161,7 @@ A practical workflow: estimate min-entropy first (not Shannon), then run AIS 31 
 Links marked **[verified]** were confirmed against sources retrieved while compiling this post. Entries marked **[citation not independently verified]** name a real, well-known work whose canonical URL was not retrieved during compilation; the bibliographic details are given so the reader can locate the authoritative source directly, and no URL is asserted to avoid mis-linking.
 
 1. Skórski, M. *Shannon Entropy versus Rényi Entropy from a Cryptographic Viewpoint.* IMACC 2015 / IACR ePrint 2014/967. [verified] https://eprint.iacr.org/2014/967.pdf
-2. Dodis, Y., Ostrovsky, R., Reyzin, L., Smith, A. *Fuzzy Extractors: How to Generate Strong Keys from Biometrics and Other Noisy Data* (DORS). Eurocrypt 2004 / SIAM J. Computing 38(1), 2008. [citation not independently verified]
+2. Dodis, Y., Ostrovsky, R., Reyzin, L., Smith, A. *Fuzzy Extractors: How to Generate Strong Keys from Biometrics and Other Noisy Data* (DORS). Eurocrypt 2004 / SIAM J. Computing 38(1), 2008 / IACR ePrint 2003/235. [verified] https://eprint.iacr.org/2003/235
 3. Lyda, R., Hamrock, J. *Using Entropy Analysis to Find Encrypted and Packed Malware.* IEEE Security & Privacy 5(2), 2007. [verified] https://dl.acm.org/doi/abs/10.1109/MSP.2007.48
 4. Mantovani, A., Aonzo, S., Ugarte-Pedrero, X., Merlo, A., Balzarotti, D. *Prevalence and Impact of Low-Entropy Packing Schemes in the Malware Ecosystem.* NDSS 2020. [verified] https://hal.science/hal-04094739/
 5. Aghakhani, H., et al. *When Malware is Packin' Heat; Limits of Machine Learning Classifiers Based on Static Analysis Features.* NDSS 2020. [verified] https://par.nsf.gov/biblio/10155112
