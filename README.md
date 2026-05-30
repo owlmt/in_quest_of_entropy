@@ -154,7 +154,6 @@ The literature above tells you *that* entropy claims break; these tools let you 
 - **NIST uniformity demo** — <https://github.com/owlmt/nist-uniformity-demo> — demonstrates the NIST-style uniformity / SP 800-22-family checks. Pair this with the caution from Hurley-Smith & Hernandez-Castro (TOPS 2020): biased QRNG streams *passed* SP 800-22 while failing Dieharder/TestU01, so treat a green result here as necessary, never sufficient.
 - **RNG uniformity demo** — <https://github.com/owlmt/rng-uniformity-demo> — a lighter-weight uniformity visualizer for quickly eyeballing distribution shape, bias, and short-period artifacts before reaching for the heavier batteries.
 
-A practical workflow: estimate min-entropy first (not Shannon), then run AIS 31 for the model-based view and the NIST/uniformity demos for the output-distribution view — and remember that *every* failure in the table above eventually surfaced as either a bad min-entropy estimate or a source producing structured output a uniformity test could have flagged, if anyone had run one.
 
 ## References
 
