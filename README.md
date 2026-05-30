@@ -203,7 +203,7 @@ Links marked **[verified]** were confirmed against sources retrieved while compi
 41. *True Random Number Generator Resistant to Frequency Injection Attacks.* Electronics Letters 51(13), 2015. [verified] https://digital-library.theiet.org/doi/full/10.1049/el.2014.4030
 42. Álvarez, G., Li, S. *Some Basic Cryptographic Requirements for Chaos-Based Cryptosystems.* Int. J. Bifurcation and Chaos 16(8), 2006. [verified] https://openresearch.surrey.ac.uk/view/pdfCoverPage?instCode=44SUR_INST&filePid=13140348250002346&download=true
 43. Rührmair, U., Sehnke, F., Sölter, J., Dror, G., Devadas, S., Schmidhuber, J. *Modeling Attacks on Physical Unclonable Functions.* CCS 2010 / IACR ePrint 2010/251. [verified] https://eprint.iacr.org/2010/251
-44. Becker, G. T. *The Gap Between Promise and Reality: On the Insecurity of XOR Arbiter PUFs.* CHES 2015. [citation not independently verified]
+44. Becker, G. T. *The Gap Between Promise and Reality: On the Insecurity of XOR Arbiter PUFs.* CHES 2015. [verified] https://dl.acm.org/doi/10.1007/978-3-662-48324-4_27
 45. Stipčević, M. *Quantum Random Number Generators and Their Use in Cryptography.* arXiv:1103.4381. [citation not independently verified]
 46. Tamura, K., Shikano, Y. *Secure Random Number Generation from Parity-Symmetric Radiations.* Communications Physics 5:65, 2022. [verified] https://www.nature.com/articles/s42005-022-00915-1
 47. Gutterman, Z., Pinkas, B., Reinman, T. *Analysis of the Linux Random Number Generator.* IEEE S&P 2006. [verified] https://www.semanticscholar.org/paper/203f9b92407c1f591f505049e0c941e5bffd1c2b
