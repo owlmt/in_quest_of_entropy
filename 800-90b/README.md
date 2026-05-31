@@ -1,104 +1,82 @@
-# Linux-kernel-style entropy + SP 800-90B test runner
+# SP 800-90B entropy toolkit + predictability demonstrations
 
-Two scripts that together (a) collect raw entropy in user space the way
-the Linux kernel's jitter entropy noise source does, and (b) run the
-SP 800-90B IID battery and min-entropy estimators on the result.
+A small toolkit that (a) collects raw entropy in user space the way the Linux
+kernel's jitter noise source does, (b) runs the NIST SP 800-90B IID battery and
+min-entropy estimators on it, and (c) demonstrates that black-box statistical
+testing cannot distinguish genuine entropy from a deterministic, fully
+predictable source once that source is run through cryptographic conditioning.
 
-## What's in here
+The estimators 6.3.9 (MultiMMC) and 6.3.10 (LZ78Y) are the same predictors as
+AIS 31 v3.0 Tirn T3 and T4 -- the harmonization is deliberate.
 
-- **`collect_entropy.py`** — measures `clock_gettime(CLOCK_MONOTONIC_RAW)`
-  deltas around a tiny LFSR payload. The low N bits of each delta become
-  one sample. This is the same idea as the kernel's `jitterentropy.c`
-  (Stephan Müller's design), which is the source feeding `add_interrupt_randomness`
-  in modern kernels.
+## Files
 
-- **`nist_90b_tests.py`** — implements:
-  - The §5.1 permutation battery (19 statistic instances)
-  - Min-entropy estimators §6.3.1, §6.3.5, §6.3.6, §6.3.7, §6.3.8, §6.3.9, §6.3.10
-  - Binary-only estimators (§6.3.2, .3, .4) are intentionally omitted
-    since the source is multi-bit.
+Collection and testing
+- collect_entropy.py  -- jitter timing noise source (clock_gettime deltas), the
+  user-space analogue of crypto/jitterentropy.c
+- nist_90b_tests.py   -- 5.1 permutation battery (19 statistics) + min-entropy
+  estimators 6.3.1, .5, .6, .7, .8, .9, .10
 
-  Note: §6.3.9 (MultiMMC) and §6.3.10 (LZ78Y) are the same predictors
-  as AIS 31 v3.0 Tirn T3 and T4. The harmonization is deliberate.
+Deterministic sources (the "backdoor" demonstrations)
+- blake_prng.py       -- BLAKE2b in counter mode keyed by a PRINTED key; output
+  is byte-for-byte reproducible yet passes 90B
+- linux_rng.py        -- faithful model of the Linux output path:
+  noise -> BLAKE2s input_pool -> extract_entropy -> ChaCha20 crng
+  (fast-key-erasure). ChaCha20 verified against RFC 8439 2.3.2.
+  Seed from real jitter (--from-jitter) or a fixed published value (--fixed-seed).
+- predict.py          -- reproduces a BLAKE2b-CTR stream from its printed key,
+  proving predictability
 
-## Quick start on WSL
+Comparisons
+- compare.py          -- two-way: real jitter vs BLAKE2b-CTR printed key
+- compare_linux.py    -- four-way: raw jitter / Linux<-jitter / Linux<-fixed-seed
+  / BLAKE2b-CTR
+
+Results and interpretation
+- RESULTS.txt         -- captured output of the two-way comparison
+- FINDINGS.md         -- interpretation of the two-way comparison
+- RESULTS_linux.txt   -- captured output of the four-way comparison
+- FINDINGS_linux.md   -- interpretation of the four-way comparison, with the
+  data-processing-inequality and HILL-pseudoentropy argument and citations
+
+## Quick start
 
 ```bash
-# 1. Collect 1M samples at 8 bits each (~20s on a typical laptop)
+pip install numpy --break-system-packages 2>/dev/null || pip install numpy
+
+# Your laptop's jitter, full SP 800-90B analysis
 python3 collect_entropy.py -n 1000000 -b 8 -o samples.bin
-
-# 2. Run the full test suite (will take a few minutes for predictors)
 python3 nist_90b_tests.py samples.bin
+
+# Two-way: real jitter vs deterministic BLAKE2b-CTR
+python3 compare.py -n 1000000 -b 8 | tee RESULTS.txt
+
+# Four-way: raw jitter vs Linux pipeline (real seed, fixed seed) vs BLAKE
+python3 compare_linux.py -n 1000000 -b 8 | tee RESULTS_linux.txt
 ```
 
-## Sample-budget guidance
+## The headline result
 
-- The §5.1 permutation battery is the slowest part by far (10k shuffles
-  × 19 statistics). The script subsets to 20k samples by default.
-  For a fuller picture, increase `--perm-subset`.
-- The predictor estimators (§6.3.7–10) are pure Python and run at ~5k
-  samples/s. 1M samples ≈ 3–5 minutes for all four.
-- For the canonical 90B numbers, build the official NIST reference:
-  `git clone https://github.com/usnistgov/SP800-90B_EntropyAssessment`
-  and run `./ea_non_iid samples.bin 8`. This Python tool is for fast
-  iteration; cross-check the final number against the C++ implementation.
+On the test laptop, raw jitter scored 2.67 bits/byte and failed 8 of 19 IID
+tests. The same jitter conditioned through the Linux pipeline jumped to 7.52
+bits and passed all 19. A copy of that pipeline seeded from a fixed, published
+value -- fully predictable -- also scored ~7.4 bits and passed all 19, as did
+the printed-key BLAKE PRG. The three conditioned columns are statistically
+indistinguishable; only one used real entropy.
 
-## Useful flags
+By the data-processing inequality, deterministic conditioning cannot increase
+min-entropy (H_inf(f(K)) <= H_inf(K)), so the high scores are not real entropy
+-- they are HILL pseudoentropy, which is what every polynomial-time statistical
+test measures. A passing battery is necessary, never sufficient, for
+unpredictability. See FINDINGS_linux.md for the full argument and citations.
 
-```bash
-# Skip the permutation battery (fast, runs only the min-entropy estimators)
-python3 nist_90b_tests.py samples.bin --no-perm
+## What this does NOT model
 
-# Force the non-IID track even if permutation passes (always runs all
-# 7 estimators) -- recommended for jitter sources because §5.1 has weak
-# power on subtle predictable structure
-python3 nist_90b_tests.py samples.bin --no-perm
+- add_interrupt_randomness() (user space can't observe interrupt timing)
+- the 3.1.4 restart tests and section 4 continuous health tests (RCT/APT)
+- a hardware RNG (RDRAND/RDSEED) contribution
 
-# Limit estimator input to N samples (for quick exploration)
-python3 nist_90b_tests.py samples.bin --max-samples 100000
-
-# Heavier permutation testing
-python3 nist_90b_tests.py samples.bin --perm-subset 50000 --perm-shuffles 10000
-```
-
-## Interpreting the output
-
-- `MCV` is the per-sample probability bound from §6.3.1. On the IID
-  track it's the only number that counts.
-- The four predictors (§6.3.7–10) each report `P_global` (raw guessing
-  rate), `P_g_up` (its 99% upper bound), `P_local` (the rate implied by
-  the longest correct-prediction run), and the final min-entropy
-  `−log₂ max(P_g_up, P_loc, 1/k)`.
-- `P_local` dominating the final number is the signal that the source
-  has subtle local structure (predictable streaks) that `P_global`
-  averages over.
-
-## Tuning the collector
-
-The defaults (64 LFSR iters/sample, 8 output bits) give roughly 7+ bits
-per byte of min-entropy on a typical x86 CPU in a moderately loaded
-system. To trade rate for entropy density:
-
-```bash
-# Stronger jitter via longer payload (slower, more entropy per byte)
-python3 collect_entropy.py -n 1000000 -w 256
-
-# Lower bits per sample (cleaner samples but less data per call)
-python3 collect_entropy.py -n 1000000 -b 4
-```
-
-## What this *doesn't* do
-
-- It doesn't replicate `add_interrupt_randomness()` — user space can't
-  observe interrupt timing.
-- It doesn't include a conditioning component (§3.1.5 of 90B). All
-  numbers reported are *pre-conditioning min-entropy*. Linux conditions
-  this through BLAKE2s + ChaCha20 before output.
-- It doesn't run the §3.1.4 restart tests (requires power-cycling the
-  source 1000 times).
-- It doesn't run the §4 continuous health tests (RCT, APT) — those are
-  for runtime monitoring, not validation.
-
-For the AIS 31 mapping, this is the NPTRNG noise-source measurement
-under NTG.1 — the same place the Linux RNG sits per the BSI's
-LinuxRNG_EN report.
+Pre-conditioning min-entropy figures from nist_90b_tests.py are a lower bound
+on what the full kernel RNG would see at the same point in the pipeline. For the
+canonical 90B numbers, cross-check with the NIST reference implementation at
+github.com/usnistgov/SP800-90B_EntropyAssessment.
