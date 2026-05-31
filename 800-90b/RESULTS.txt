@@ -1,0 +1,77 @@
+# Source: jitter timing, 64 LFSR iters/sample, 8 low bits per delta-ns
+# Target: 1,000,000 samples -> /tmp/cmp_jitter.bin
+# Done: 1,000,000 bytes in 19.72s (50,710 samples/s)
+#
+# Distinct values used:        64 / 256
+# Most common value freq:      0.0702
+# Naive MCV min-entropy:       3.8319 bits/sample
+# Top 5 by frequency:          [(16, 70224), (116, 67253), (172, 65799), (216, 63937), (60, 56155)]
+#
+# Next: python3 nist_90b_tests.py /tmp/cmp_jitter.bin
+# Source: deterministic BLAKE2b counter mode
+# Printed key (hex, 32 bytes):
+#   000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
+# Counter starts at 0, big-endian 8 bytes
+# Output = (block_i bytes) & 0xff  (low 8 bits)
+# Target: 1,000,000 samples -> /tmp/cmp_blake.bin
+# Done: 1,000,000 bytes in 0.081s (12,301,834 samples/s)
+#
+# Distinct values used:  256 / 256
+# Most common freq:      0.0041
+# Naive MCV min-entropy: 7.9298 bits/sample
+#
+# Verify reproducibility:
+#   python3 predict.py /tmp/cmp_blake.bin --key 000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f --bits 8
+OK: predicted 1,000,000 bytes match /tmp/cmp_blake.bin exactly.
+    First 32 bytes: 9212bc97156556f62890b1af163258514c78fd9c7a4fffa97a3381bca1fa788f
+    This stream is byte-for-byte reproducible from the printed key.
+======================================================================
+STEP 1: Collect jitter entropy (real, non-reproducible)
+======================================================================
+
+======================================================================
+STEP 2: Generate BLAKE2b-CTR stream (deterministic, reproducible)
+======================================================================
+
+======================================================================
+STEP 3: Verify BLAKE stream is byte-for-byte reproducible
+======================================================================
+
+======================================================================
+STEP 4: SP 800-90B analysis on both sources
+======================================================================
+  permutation battery: 10,000 samples, 2000 shuffles, 19 statistics
+  permutation battery: 10,000 samples, 2000 shuffles, 19 statistics
+
+======================================================================
+  COMPARISON: real jitter entropy  vs.  PRG with printed key
+======================================================================
+  samples per source : 1,000,000
+  bits per sample    : 8
+  alphabet (k)       : jitter=64, blake=256
+  theoretical max H  : 6.000 bits/sample
+
+  Estimator                 jitter (real)    BLAKE (printed key)
+  ---------------------- ---------------- ----------------------
+  MCV                              3.8184                 7.8730
+  t-Tuple                          2.5736                 7.8730
+  LRS                              2.7670                 7.9391
+  MultiMCW                         2.9295                 7.9648
+  Lag                              2.7218                 7.9275
+  MultiMMC                         2.6202                 7.9401  (= Tirn T3)
+  LZ78Y                            2.7082                 7.9387  (= Tirn T4)
+  ---------------------- ---------------- ----------------------
+  FINAL min-entropy                2.5736                 7.8730
+
+  §5.1 permutation battery (subset=10000, shuffles=2000):
+    jitter: 12/19 tests pass -> non-IID track
+    BLAKE : 19/19 tests pass -> IID track
+
+======================================================================
+  INTERPRETATION
+======================================================================
+  Final min-entropy delta: 5.2995 bits/sample
+  This is the operational form of AIS 31 §4.6.2:
+     statistical tests can falsify a stochastic model but never verify it.
+     A passing 90B result is necessary, not sufficient, for unpredictability.
+======================================================================
