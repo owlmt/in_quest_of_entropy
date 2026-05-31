@@ -1,5 +1,7 @@
 # Conditioning, not entropy: a four-way SP 800-90B comparison
 
+**Note:** This is not a flaw in NIST SP 800-90B or BSI AIS 31 — both already require raw noise-source data, a stochastic model, and a protected security boundary precisely because black-box output testing alone can be fooled; this experiment demonstrates *why* those source-level requirements exist, not a gap in the standards.
+
 **One line:** running raw entropy through the Linux RNG's own BLAKE2s + ChaCha20
 conditioning makes a weak 2.67-bit/byte source, a fully predictable fixed-seed
 source, and a printed-key PRG all score ~7.4-7.9 bits/byte and pass the entire
