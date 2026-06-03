@@ -1,0 +1,4 @@
+target=pseudo_sample.bin seed_bits=32
+recovered_seed=3220314010
+wall_seconds=1257.2
+stream_reconstructed=True
