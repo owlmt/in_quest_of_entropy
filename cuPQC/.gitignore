@@ -1,0 +1,14 @@
+# harness output
+data/*.bin
+data/*.blocks.bin
+data/*.matrix.bin
+data/*.meta.json
+data/*.png
+data/*.txt
+data/_prov*
+data/clones/
+data/strace.log
+analysis/__pycache__/
+*.pyc
+harness/entropy_probe
+.venv/

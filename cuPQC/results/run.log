@@ -1,0 +1,45 @@
+nohup: ignoring input
+=== Exp1 dump 1GiB ===
+[probe] subject=cupqc_get_entropy variant=encaps mode=dump
+[dump] 64.00 / 1024.00 MiB[dump] 128.00 / 1024.00 MiB[dump] 192.00 / 1024.00 MiB[dump] 256.00 / 1024.00 MiB[dump] 320.00 / 1024.00 MiB[dump] 384.00 / 1024.00 MiB[dump] 448.00 / 1024.00 MiB[dump] 512.00 / 1024.00 MiB[dump] 576.00 / 1024.00 MiB[dump] 640.00 / 1024.00 MiB[dump] 704.00 / 1024.00 MiB[dump] 768.00 / 1024.00 MiB[dump] 832.00 / 1024.00 MiB[dump] 896.00 / 1024.00 MiB[dump] 960.00 / 1024.00 MiB[dump] 1024.00 / 1024.00 MiB
+[dump] wrote 1073741824 bytes -> data/enc.bin
+[meta] wrote data/enc.meta.json
+=== Exp3a collision 100k ===
+[probe] subject=cupqc_get_entropy variant=encaps mode=collision
+[collision] 0 / 100000 calls, 0 collisions[collision] 65536 / 100000 calls, 0 collisions
+[collision] 100000 blocks, 0 exact collisions
+[meta] wrote data/col.meta.json
+=== Exp4 batchcorr 100k ===
+[probe] subject=cupqc_get_entropy variant=encaps mode=batchcorr
+[batchcorr] wrote 100000 x 32 matrix -> data/bc.matrix.bin
+[meta] wrote data/bc.meta.json
+=== Exp3c provenance ===
+[strace] tracing entropy-relevant syscalls ...
+[strace] hits:
+73:getrandom("\xaf\x2e\x96\xd9\xa9\xbc\x89\x2c", 8, GRND_NONBLOCK) = 8
+248:[pid  3464] openat(AT_FDCWD</home/ubuntu/cuPQC>, "/dev/urandom", O_RDWR) = 38</dev/urandom<char 1:9>>
+249:[pid  3464] read(38</dev/urandom<char 1:9>>, "\215-\0\327\2535Z\220\277\374\35\253\3\1\356\v\1g\351\217\322BOdLZ\247*N\241\363\217"..., 32768) = 32768
+[strace] full log: data/strace.log
+=== analysis/plots ===
+/usr/local/lib/python3.12/dist-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[dump] wrote data/enc.dump.png
+/usr/local/lib/python3.12/dist-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[collision] wrote data/col.collision.png  (observed=0)
+/usr/local/lib/python3.12/dist-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[batchcorr] wrote data/bc.batchcorr.png  max|r|=0.0094 flagged_bits=0
+=== ent ===
+Entropy = 8.000000 bits per byte.
+
+Optimum compression would reduce the size
+of this 1073741824 byte file by 0 percent.
+
+Chi square distribution for 1073741824 samples is 254.31, and randomly
+would exceed this value 50.05 percent of the times.
+
+Arithmetic mean value of data bytes is 127.5012 (127.5 = random).
+Monte Carlo value for Pi is 3.141421337 (error 0.01 percent).
+Serial correlation coefficient is 0.000004 (totally uncorrelated = 0.0).
+ALL-DONE
