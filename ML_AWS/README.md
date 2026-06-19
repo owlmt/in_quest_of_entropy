@@ -71,6 +71,10 @@ A capture that collapses to a single periodic carrier is rejected and recaptured
 - 2026-06-19  Real timed capture: 1,662,184 IRQ events in 300s (~5,540/s), 0 lost. ~50% NVMe / ~50% NIC.
 - 2026-06-19  bt_to_csv.py verified: reproduces prior WSL2 rng_hw.csv byte-for-byte (15/15 cols, 921,872 rows);
               cascade is per-source; est_bits = min(floor(log2(min_delta)), 11).
-- PENDING     Quality gate on AWS-derived rng_hw.csv.
+- 2026-06-19  QUALITY GATE PASS on AWS rng_hw.csv: 1,662,180 events, 10 CPUs, 11 IRQ vectors (top 28.8%),
+              invariant holds, cycles monotonic, 11 zero-delta rows.
+- 2026-06-19  KEY FACTS vs WSL2: jitter autocorr ~0 (unchanged); delta_cycles autocorr collapsed
+              0.57 (WSL2) -> 0.045 (multi-IRQ); LSB(jitter) P(1)=0.4994 (balanced) vs 0.416 WSL2.
+              -> WSL2 carrier + LSB bias were single-periodic-interrupt artifacts; only jitter (~0) remains.
 - PENDING     GPU ML host + full pipeline.
 - PENDING     Scientific verdict + teardown.
