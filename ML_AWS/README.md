@@ -79,5 +79,9 @@ A capture that collapses to a single periodic carrier is rejected and recaptured
 - 2026-06-19  Provenance bundle committed (29 files): AWS-signed instance identity (pkcs7),
               dmidecode/proc_interrupts/dmesg/ethtool hardware evidence, capture.bt, bt_to_csv.py,
               SHA256SUMS of full files, 100k-row samples. See ML_AWS/PROVENANCE.md + DATASET.md.
-- PENDING     GPU ML host + full pipeline.
+- 2026-06-19  RAW per-stream experiment (rng_raw.py): per-source/per-CPU dnsecs + low-bit prediction.
+              FINDING: predictable carrier, unpredictable payload. Next-source acc 0.466 vs 0.281 marginal;
+              coarse dnsecs R2 up to 0.215 (cpu-11) / 0.16 (ENA queues), ~0 (NVMe). Low-bit AUC ~0.50 at
+              EVERY stream (CIs include 0.5, MCC~0, shuffle~0.50, round-trip corr~0) incl. per-source isolation.
+              -> coarse cadence/source identity predictable; credited entropy bit is not.\n- PENDING     GPU ML host + full pipeline.
 - PENDING     Scientific verdict + teardown.
