@@ -1,0 +1,94 @@
+
+======================================================================
+TARGET delta_cycles (regression)
+ baselines: {"seasonal_lag": 9, "seasonal_train_ac": 0.0731520026194132, "persistence_R2": -0.9801443916677972, "seasonal_R2": -0.9379228539621394, "mean_R2": -0.0053638167319356445}
+ -- window x feature sweep (linear + LightGBM) --
+  best probe: W=128 fs=H val=0.0115
+ -- Optuna (100 trials/family) at W=128 fs=H --
+   Ridge         test R2=-0.0066
+   ElasticNet    test R2=-0.0045
+   RandomForest  test R2=+0.0231
+   ExtraTrees    test R2=+0.0204
+   XGBoost       test R2=+0.0330
+   LightGBM      test R2=+0.0310
+   MLP           test R2=-0.0012
+   CatBoost      test R2=+0.0210
+ -- sequence models (GPU) at W in [64, 256] --
+   CNN1D        W=64   test R2=+0.0021
+   TCN          W=64   test R2=+0.0057
+   LSTM         W=64   test R2=+0.0003
+   GRU          W=64   test R2=+0.0002
+   BiLSTM       W=64   test R2=+0.0002
+   Transformer  W=64   test R2=+0.0009
+   CNN1D        W=256  test R2=-0.0002
+   TCN          W=256  test R2=-0.0000
+   LSTM         W=256  test R2=-0.0002
+   GRU          W=256  test R2=-0.0003
+   BiLSTM       W=256  test R2=-0.0000
+   Transformer  W=256  test R2=-0.0003
+ target done in 3335s; best={'score': 0.033021481214290715, 'model': 'XGBoost', 'window': None, 'test': {'MAE': 126388.66749679064, 'RMSE': 154007.84899267368, 'R2': 0.033021481214290715, 'skill_vs_persist': 0.5052757363790358, 'skill_CI': (0.4996205555065727, 0.5112332246520891)}}
+
+======================================================================
+TARGET jitter (regression)
+ baselines: {"seasonal_lag": 535, "seasonal_train_ac": 0.003162024872135736, "persistence_R2": -1.006374700259844, "seasonal_R2": -1.0020992873666863, "mean_R2": -1.4965751964357565e-06}
+ -- window x feature sweep (linear + LightGBM) --
+  best probe: W=128 fs=E val=0.0001
+ -- Optuna (100 trials/family) at W=128 fs=E --
+   Ridge         test R2=+0.0000
+   ElasticNet    test R2=+0.0000
+   RandomForest  test R2=-0.0006
+   ExtraTrees    test R2=-0.0001
+   XGBoost       test R2=-0.0001
+   LightGBM      test R2=-0.0002
+   MLP           test R2=-0.0008
+   CatBoost      test R2=-0.0001
+ -- sequence models (GPU) at W in [64, 256] --
+   CNN1D        W=64   test R2=+0.0000
+   TCN          W=64   test R2=-0.0000
+   LSTM         W=64   test R2=-0.0001
+   GRU          W=64   test R2=-0.0001
+   BiLSTM       W=64   test R2=-0.0001
+   Transformer  W=64   test R2=-0.0001
+   CNN1D        W=256  test R2=-0.0001
+   TCN          W=256  test R2=-0.0000
+   LSTM         W=256  test R2=+0.0000
+   GRU          W=256  test R2=-0.0000
+   BiLSTM       W=256  test R2=+0.0000
+   Transformer  W=256  test R2=-0.0001
+ target done in 1934s; best={'score': 4.5180320739746094e-05, 'model': 'LSTM', 'window': 256, 'test': {'MAE': 255.67149353027344, 'RMSE': 295.4461975097656, 'R2': 4.5180320739746094e-05, 'skill_vs_persist': 0.4988815188407898, 'skill_CI': (0.4935517147183418, 0.5040396347641944)}}
+
+======================================================================
+TARGET lsb (classification)
+ baselines: {"seasonal_lag": 1727, "seasonal_train_ac": 0.0031743509784460146, "majority_class": 0, "majority_base_rate": 0.5008113269492904, "persistence_AUC": 0.500064564055395}
+ -- window x feature sweep (linear + LightGBM) --
+  best probe: W=16 fs=B val=0.5096
+ -- Optuna (100 trials/family) at W=16 fs=B --
+   Logistic      test AUC=+0.4998
+   RandomForest  test AUC=+0.5002
+   ExtraTrees    test AUC=+0.4985
+   XGBoost       test AUC=+0.5010
+   LightGBM      test AUC=+0.5006
+   MLP           test AUC=+0.5038
+   CatBoost      test AUC=+0.4976
+ -- sequence models (GPU) at W in [64, 256] --
+   CNN1D        W=64   test AUC=+0.5009
+   TCN          W=64   test AUC=+0.5006
+   LSTM         W=64   test AUC=+0.5033
+   GRU          W=64   test AUC=+0.5028
+   BiLSTM       W=64   test AUC=+0.5039
+   Transformer  W=64   test AUC=+0.5024
+   CNN1D        W=256  test AUC=+0.5009
+   TCN          W=256  test AUC=+0.4998
+   LSTM         W=256  test AUC=+0.4981
+   GRU          W=256  test AUC=+0.4999
+   BiLSTM       W=256  test AUC=+0.4981
+   Transformer  W=256  test AUC=+0.5009
+ target done in 2106s; best={'score': 0.5038993337519274, 'model': 'BiLSTM', 'window': 64, 'test': {'AUC': 0.5038993337519274, 'AUC_lo': 0.49856440213165426, 'AUC_hi': 0.5092342653722005, 'PR_AUC': 0.5019913541668866, 'bal_acc': 0.50049984286026, 'MCC': 0.005412694834776938, 'Brier': 0.24999123811721802, 'perm_p': 0.16943521594684385}}
+
+======================================================================
+VERDICT
+ delta_cycles: best R2_vs_mean=+0.0330 | persistence_R2=-0.9801
+ jitter: best R2_vs_mean=+0.0000 | persistence_R2=-1.0064
+ lsb: best AUC=0.5039 CI_lo=0.4986 | majority_base=0.5008 -> NO predictability
+
+Wrote results/results.json
