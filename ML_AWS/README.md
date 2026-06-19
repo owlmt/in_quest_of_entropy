@@ -63,11 +63,14 @@ A capture that collapses to a single periodic carrier is rejected and recaptured
 
 ## Milestone log (facts only)
 - 2026-06-19  AWS CLI configured (eu-west-2).
-- 2026-06-19  vCPU quota increase requested (L-1216C47A -> 80): PENDING.
-- 2026-06-19  Capture host launched: c6in.4xlarge, Ubuntu 24.04; cloud-init installed
-              bpftrace, fio, iperf3, stress-ng.
-- PENDING     SSH + kprobe-availability verification.
-- PENDING     Real-load capture.
-- PENDING     Download + quality gate.
-- PENDING     Full ML pipeline.
+- 2026-06-19  vCPU quota: Standard L-1216C47A -> 80 approved; G/VT L-DB2E81BA -> 32 requested.
+- 2026-06-19  Capture host: c6in.4xlarge, Ubuntu 24.04, kernel 6.17.0-1017-aws; bpftrace v0.20.2, BTF present.
+- 2026-06-19  RNG kprobes verified: add_interrupt/input/disk/device/timer/hwgenerator/vmfork_randomness.
+- 2026-06-19  Diversity validated under real load (16 NIC streams + fio NVMe): 10 CPUs, 10 IRQ vectors
+              (8 ENA Tx-Rx queues 26-33 + nvme0q1/q2 34-35), 0 lost events.
+- 2026-06-19  Real timed capture: 1,662,184 IRQ events in 300s (~5,540/s), 0 lost. ~50% NVMe / ~50% NIC.
+- 2026-06-19  bt_to_csv.py verified: reproduces prior WSL2 rng_hw.csv byte-for-byte (15/15 cols, 921,872 rows);
+              cascade is per-source; est_bits = min(floor(log2(min_delta)), 11).
+- PENDING     Quality gate on AWS-derived rng_hw.csv.
+- PENDING     GPU ML host + full pipeline.
 - PENDING     Scientific verdict + teardown.
