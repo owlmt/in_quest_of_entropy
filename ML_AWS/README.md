@@ -76,5 +76,8 @@ A capture that collapses to a single periodic carrier is rejected and recaptured
 - 2026-06-19  KEY FACTS vs WSL2: jitter autocorr ~0 (unchanged); delta_cycles autocorr collapsed
               0.57 (WSL2) -> 0.045 (multi-IRQ); LSB(jitter) P(1)=0.4994 (balanced) vs 0.416 WSL2.
               -> WSL2 carrier + LSB bias were single-periodic-interrupt artifacts; only jitter (~0) remains.
+- 2026-06-19  Provenance bundle committed (29 files): AWS-signed instance identity (pkcs7),
+              dmidecode/proc_interrupts/dmesg/ethtool hardware evidence, capture.bt, bt_to_csv.py,
+              SHA256SUMS of full files, 100k-row samples. See ML_AWS/PROVENANCE.md + DATASET.md.
 - PENDING     GPU ML host + full pipeline.
 - PENDING     Scientific verdict + teardown.
