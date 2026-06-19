@@ -164,14 +164,3 @@ python rng_pipeline.py --csv rng_hw.csv --out results \
   --windows 4,8,16,32,64,128,256,512 --seq-windows 64,256 | tee results/console.txt
 ```
 
----
-
-## Relation to the paper
-
-These measurements are the empirical leg of the seed-security argument. The bridge
-section (`drbg_empirical_bridge.tex`) connects them to the entropy-ceiling theorems:
-the credited stream is treated as a block source whose per-event rate the kernel asserts
-by **count**, not by measured conditional min-entropy. Under the legitimacy hypothesis
-the seed has min{2^(n/2), 2^(λ/2)} = 2^128 security for n = λ = 256 (Chung et al., 2024,
-with matching attacks). The empirical null supports the per-event leg of that hypothesis
-in the benign regime; the runtime rule does not enforce it in general.
