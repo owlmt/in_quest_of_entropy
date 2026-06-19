@@ -1,0 +1,42 @@
+[    0.000000] Linux version 6.17.0-1017-aws (buildd@lcy02-amd64-010) (x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #17~24.04.1-Ubuntu SMP Tue May 26 21:30:32 UTC 2026 (Ubuntu 6.17.0-1017.17~24.04.1-aws 6.17.13)
+[    0.000000] Command line: BOOT_IMAGE=/vmlinuz-6.17.0-1017-aws root=PARTUUID=fe814a98-f7fd-4c3d-9642-c18fe64c6e5d ro console=tty1 console=ttyS0 nvme_core.io_timeout=4294967295 panic=-1
+[    0.000000] x86/tme: enabled by BIOS
+[    0.000000] Hypervisor detected: KVM
+[    0.060530] Kernel command line: BOOT_IMAGE=/vmlinuz-6.17.0-1017-aws root=PARTUUID=fe814a98-f7fd-4c3d-9642-c18fe64c6e5d ro console=tty1 console=ttyS0 nvme_core.io_timeout=4294967295 panic=-1
+[    0.060582] random: crng init done
+[    0.149750] 	Rude variant of Tasks RCU enabled.
+[    0.149751] 	Tracing variant of Tasks RCU enabled.
+[    0.152876] printk: legacy console [tty1] enabled
+[    0.153075] printk: legacy console [ttyS0] enabled
+[    0.296471] x2apic enabled
+[    0.302117] mitigations: Enabled attack vectors: user_kernel, user_user, guest_host, guest_guest, SMT mitigations: auto
+[    0.302117] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+[    0.302117] GDS: Unknown: Dependent on hypervisor status
+[    0.302117] x86/fpu: Enabled xstate features 0x2e7, context size is 2440 bytes, using 'compacted' format.
+[    0.342013] audit: type=2000 audit(1781865090.894:1): state=initialized audit_enabled=0 res=1
+[    0.349191] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.360338] ACPI: Interpreter enabled
+[    0.363177] ACPI: Enabled 2 GPEs in block 00 to 0F
+[    0.405160] pci 0000:00:04.0: enabling Extended Tags
+[    0.410182] pci 0000:00:05.0: enabling Extended Tags
+[    0.446473] AppArmor: AppArmor Filesystem Enabled
+[    0.534797] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    0.567167] nvme nvme0: pci function 0000:00:04.0
+[    0.568905] ACPI: \_SB_.LNKD: Enabled at IRQ 11
+[    0.570787] ena 0000:00:05.0: ENA device version: 0.10
+[    0.571610] ena 0000:00:05.0: ENA controller version: 0.0.1 implementation version 1
+[    0.579262] ena 0000:00:05.0: Elastic Network Adapter (ENA) found at mem c0506000, mac addr 06:b1:d3:b7:8d:77
+[    0.579632] nvme nvme0: 2/0/0 default/read/poll queues
+[    0.591566]  nvme0n1: p1 p14 p15 p16
+[    0.615778] IPI shorthand broadcast: enabled
+[    0.659578] AppArmor: AppArmor sha256 policy hashing enabled
+[    1.102124] EXT4-fs (nvme0n1p1): Supports (experimental) DIO atomic writes awu_min: 4096, awu_max: 4096
+[    1.105041] EXT4-fs (nvme0n1p1): mounted filesystem 0ef35759-eb42-4358-9a2a-1f74696d7007 ro with ordered data mode. Quota mode: none.
+[    2.382490] EXT4-fs (nvme0n1p1): re-mounted 0ef35759-eb42-4358-9a2a-1f74696d7007 r/w.
+[    2.855673] ena 0000:00:05.0 ens5: renamed from eth0
+[    2.970021] nvme nvme0: using unchecked data buffer
+[    3.159643] EXT4-fs (nvme0n1p16): Supports (experimental) DIO atomic writes awu_min: 4096, awu_max: 4096
+[    3.160705] EXT4-fs (nvme0n1p16): mounted filesystem 8fb95cef-95fc-48ca-aaab-3f1b1df59748 r/w with ordered data mode. Quota mode: none.
+[    9.193955] EXT4-fs (nvme0n1p1): resizing filesystem from 1834747 to 25951995 blocks
+[    9.413540] EXT4-fs (nvme0n1p1): resized filesystem to 25951995
+[ 3707.306451] ena 0000:00:05.0: Type was not set for devlink port.

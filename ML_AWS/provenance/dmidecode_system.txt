@@ -1,0 +1,15 @@
+# dmidecode 3.5
+Getting SMBIOS data from sysfs.
+SMBIOS 2.7 present.
+
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+	Manufacturer: Amazon EC2
+	Product Name: c6in.4xlarge
+	Version: Not Specified
+	Serial Number: ec256f1a-3c4b-dac8-17bb-987d2eacbbe5
+	UUID: ec256f1a-3c4b-dac8-17bb-987d2eacbbe5
+	Wake-up Type: Power Switch
+	SKU Number: Not Specified
+	Family: Not Specified
+

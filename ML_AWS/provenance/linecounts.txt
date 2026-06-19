@@ -1,0 +1,3 @@
+  1662184 /home/ubuntu/raw_events.csv
+  1662181 /home/ubuntu/rng_hw.csv
+  3324365 total

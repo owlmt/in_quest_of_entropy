@@ -1,0 +1,7 @@
+kprobe:add_device_randomness
+kprobe:add_disk_randomness
+kprobe:add_hwgenerator_randomness
+kprobe:add_input_randomness
+kprobe:add_interrupt_randomness
+kprobe:add_timer_randomness
+kprobe:add_vmfork_randomness

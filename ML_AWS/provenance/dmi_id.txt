@@ -1,0 +1,3 @@
+sys_vendor=Amazon EC2
+product_name=c6in.4xlarge
+bios_vendor=Amazon EC2

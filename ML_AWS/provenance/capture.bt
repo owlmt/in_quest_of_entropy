@@ -1,0 +1,4 @@
+BEGIN { printf("source,cpu,nsecs,a,b,c\n"); }
+kprobe:add_interrupt_randomness { printf("IRQ,%d,%llu,%d,0,0\n", cpu, nsecs, arg0); }
+kprobe:add_disk_randomness      { printf("DISK,%d,%llu,0,0,0\n", cpu, nsecs); }
+kprobe:add_input_randomness     { printf("INPUT,%d,%llu,%d,%d,%d\n", cpu, nsecs, arg0, arg1, arg2); }

@@ -1,0 +1,1 @@
+Linux version 6.17.0-1017-aws (buildd@lcy02-amd64-010) (x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #17~24.04.1-Ubuntu SMP Tue May 26 21:30:32 UTC 2026
